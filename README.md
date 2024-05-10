@@ -15,12 +15,12 @@ Convenient Access: Quickly access ChatGPT website from within VSCode.
 
 Install the HelpGPT Extension from the VSCode marketplace.
 Use the following commands from the VSCode command palette:
-**helpgpt.prompt**: Opens an input box for typing prompts to ChatGPT.
-**helpgpt.document**: Generates documentation for the current code.
-**helpgpt.summarize**: Summarizes and explains the current code.
-**helpgpt.debug**: Requests debugging assistance for the current code.
-**helpgpt.refactor**: Receives suggestions for refactoring and optimizing the current code.
-**helpgpt.open**: Opens the ChatGPT website in your default browser.
+**Prompt - ChatGPT**: Opens an input box for typing prompts to ChatGPT.
+**Document - ChatGPT**: Generates documentation for the current code.
+**Summarize - ChatGPT**: Summarizes and explains the current code.
+**Debug - ChatGPT**: Requests debugging assistance for the current code.
+**Refactor - ChatGPT**: Receives suggestions for refactoring and optimizing the current code.
+**Open - ChatGPT**: Opens the ChatGPT website in your default browser.
 Follow the prompts and instructions to interact with ChatGPT and get the assistance you need.
 
 ## Requirements
@@ -32,8 +32,7 @@ Visual Studio Code
 Open VSCode.
 Go to the Extensions view by clicking on the square icon in the sidebar or pressing `Ctrl+Shift+X`.
 Search for "HelpGPT" in the Extensions marketplace.
-Click on the Install button for the HelpGPT extension authored by [Your Name].
 
 ## License
 
-This project is licensed under the [License Name] License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
