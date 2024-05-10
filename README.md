@@ -15,12 +15,19 @@ Convenient Access: Quickly access ChatGPT website from within VSCode.
 
 Install the HelpGPT Extension from the VSCode marketplace.
 Use the following commands from the VSCode command palette:
+
 **Prompt - ChatGPT**: Opens an input box for typing prompts to ChatGPT.
+
 **Document - ChatGPT**: Generates documentation for the current code.
+
 **Summarize - ChatGPT**: Summarizes and explains the current code.
+
 **Debug - ChatGPT**: Requests debugging assistance for the current code.
+
 **Refactor - ChatGPT**: Receives suggestions for refactoring and optimizing the current code.
+
 **Open - ChatGPT**: Opens the ChatGPT website in your default browser.
+
 Follow the prompts and instructions to interact with ChatGPT and get the assistance you need.
 
 ## Requirements
