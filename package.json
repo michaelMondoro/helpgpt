@@ -1,7 +1,10 @@
 {
   "name": "helpgpt",
   "displayName": "HelpGPT",
+  "publisher": "mikeymon",
   "description": "Open ChatGPT from VS Code",
+  "repository": {"url": "https://github.com/michaelMondoro/helpgpt"},
+  "license": "MIT",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.89.0"
