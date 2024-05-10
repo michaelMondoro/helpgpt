@@ -1,0 +1,59 @@
+{
+  "name": "helpgpt",
+  "displayName": "HelpGPT",
+  "description": "Open ChatGPT from VS Code",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "helpgpt.prompt",
+        "title": "Prompt - ChatGPT"
+      },
+      {
+        "command": "helpgpt.document",
+        "title": "Document - ChatGPT"
+      },
+      {
+        "command": "helpgpt.summarize",
+        "title": "Summarize - ChatGPT"
+      },
+      {
+        "command": "helpgpt.debug",
+        "title": "Debug - ChatGPT"
+      },
+      {
+        "command": "helpgpt.refactor",
+        "title": "Refactor - ChatGPT"
+      },
+      {
+        "command": "helpgpt.open",
+        "title": "Open - ChatGPT"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.89.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "opn": "^6.0.0"
+  }
+}
