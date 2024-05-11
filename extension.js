@@ -32,6 +32,7 @@ function activate(context) {
     context.subscriptions.push(disposable3);
     context.subscriptions.push(disposable4);
     context.subscriptions.push(disposable5);
+    context.subscriptions.push(disposable6);
 }
 
 function promptTheGPT() {
@@ -52,12 +53,44 @@ function promptTheGPT() {
 
 function commandTheGPT(prompt) {
     const content = getEditorContent();
-    if (content) {
-        prompt = `${prompt} : ${content}`;
-        opn('https://chatgpt.com/?q=' + encodeURIComponent(prompt));
+    const selectedText = getSelectedContent();
+    if (selectedText) {
+        // Options for the quick pick menu
+        const options = ['all', 'selected'];
+        // Show the quick pick menu
+        vscode.window.showQuickPick(options)
+            .then(selection => {
+                if (selection) {
+                    if (selection === 'all') {
+                        prompt = `${prompt} : ${content}`;
+                    } else {
+                        prompt = `${prompt} : ${selectedText}`;
+                    }
+                    opn('https://chatgpt.com/?q=' + encodeURIComponent(prompt));        
+                } else {
+                    vscode.window.showErrorMessage('No option selected. 😓');
+                }
+            });
     } else {
-        vscode.window.showErrorMessage("Open some code first! 🤬");
+        if (content) {
+            prompt = `${prompt} : ${content}`;
+            opn('https://chatgpt.com/?q=' + encodeURIComponent(prompt));
+        } else {
+            vscode.window.showErrorMessage("Open some code first! 🤬");
+        }
     }
+
+}
+
+function getSelectedContent() {
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+        // Get the selection from the active text editor
+        const selection = editor.selection;
+        const selectedText = editor.document.getText(selection);
+        return selectedText;
+    }
+    return null;
 }
 
 function getEditorContent() {
