@@ -1,114 +1,73 @@
 const vscode = require('vscode');
-const opn = require('opn');
 
 function activate(context) {
-    let disposable1 = vscode.commands.registerCommand('helpgpt.prompt', () => {
-        promptTheGPT();
-    });
+    registerCommand('helpgpt.prompt', promptTheGPT);
+    registerCommand('helpgpt.document', () => commandTheGPT("please generate documentation for this code"));
+    registerCommand('helpgpt.summarize', () => commandTheGPT("please explain and summarize this code"));
+    registerCommand('helpgpt.debug', () => commandTheGPT("please debug this code"));
+    registerCommand('helpgpt.refactor', () => commandTheGPT("please refactor and optimize this code"));
+    registerCommand('helpgpt.ask', askSpecificQuestion);
+    registerCommand('helpgpt.open', () => vscode.env.openExternal(vscode.Uri.parse('https://chatgpt.com/')));
 
-    let disposable2 = vscode.commands.registerCommand('helpgpt.document', () => {
-        commandTheGPT("please generate documentation for this code");
-    });
+    context.subscriptions.push(...Object.values(commands));
+}
 
-    let disposable3 = vscode.commands.registerCommand('helpgpt.summarize', () => {
-        commandTheGPT("please explain and summarize this code");
-    });
+const commands = {};
 
-    let disposable4 = vscode.commands.registerCommand('helpgpt.debug', () => {
-        commandTheGPT("please debug this code");
-    });
-
-    let disposable5 = vscode.commands.registerCommand('helpgpt.refactor', () => {
-        commandTheGPT("please refactor and optimize this code");
-    });
-
-    let disposable6 = vscode.commands.registerCommand('helpgpt.open', () => {
-        vscode.window.showInformationMessage("Opening ChatGPT 👀");
-        opn('https://chatgpt.com/');
-    });
-
-    context.subscriptions.push(disposable1);
-    context.subscriptions.push(disposable2);
-    context.subscriptions.push(disposable3);
-    context.subscriptions.push(disposable4);
-    context.subscriptions.push(disposable5);
-    context.subscriptions.push(disposable6);
+function registerCommand(name, callback) {
+    commands[name] = vscode.commands.registerCommand(name, callback);
 }
 
 function promptTheGPT() {
-    // Open ChatGPT URL in the default browser
-    vscode.window.showInputBox({
-        prompt: '',
-        placeHolder: 'Prompt',
-        value: ''
-    }).then((value) => {
+    showInputBox('Prompt', (value) => {
         if (value) {
-            opn('https://chatgpt.com/?q=' + value); 
+            openChatGPT(`https://chatgpt.com/?q=${encodeURIComponent(value)}`);
         } else {
-            vscode.window.showErrorMessage('Please supply a prompt! 🤮');
-            return;
-        }   
+            showErrorMessage('Please supply a prompt! 🤮');
+        }
     });
 }
 
 function commandTheGPT(prompt) {
     const content = getEditorContent();
     const selectedText = getSelectedContent();
-    if (selectedText) {
-        // Options for the quick pick menu
-        const options = ['all', 'selected'];
-        // Show the quick pick menu
-        vscode.window.showQuickPick(options)
-            .then(selection => {
-                if (selection) {
-                    if (selection === 'all') {
-                        prompt = `${prompt} : ${content}`;
-                    } else {
-                        prompt = `${prompt} : ${selectedText}`;
-                    }
-                    opn('https://chatgpt.com/?q=' + encodeURIComponent(prompt));        
-                } else {
-                    vscode.window.showErrorMessage('No option selected. 😓');
-                }
-            });
-    } else {
-        if (content) {
-            prompt = `${prompt} : ${content}`;
-            opn('https://chatgpt.com/?q=' + encodeURIComponent(prompt));
-        } else {
-            vscode.window.showErrorMessage("Open some code first! 🤬");
-        }
-    }
+    const fullPrompt = selectedText ? `${selectedText} \n\n ${prompt}` : `${content} \n\n ${prompt}`;
+    openChatGPT(`https://chatgpt.com/?q=${encodeURIComponent(fullPrompt)}`);
+}
 
+function askSpecificQuestion() {
+    showInputBox('Ask a specific question about your code', (value) => {
+        if (value) {
+            commandTheGPT(value);
+        } else {
+            showErrorMessage('Please supply a prompt! 🤮');
+        }
+    });
+}
+
+function showInputBox(placeHolder, callback) {
+    vscode.window.showInputBox({ prompt: '', placeHolder, value: '' }).then(callback);
+}
+
+function showErrorMessage(message) {
+    vscode.window.showErrorMessage(message);
+}
+
+function openChatGPT(url) {
+    vscode.window.showInformationMessage("Opening ChatGPT 👀");
+    vscode.env.openExternal(vscode.Uri.parse(url));
 }
 
 function getSelectedContent() {
     const editor = vscode.window.activeTextEditor;
-    if (editor) {
-        // Get the selection from the active text editor
-        const selection = editor.selection;
-        const selectedText = editor.document.getText(selection);
-        return selectedText;
-    }
-    return null;
+    return editor ? editor.document.getText(editor.selection) : null;
 }
 
 function getEditorContent() {
-    // Get the active text editor
     const editor = vscode.window.activeTextEditor;
-    if (editor) {
-        // Get the document associated with the active editor
-        const document = editor.document;
-        // Get the text contents of the document
-        const content = document.getText();
-        return content;
-    } else {
-        return null;
-    }
+    return editor ? editor.document.getText() : null;
 }
+
 function deactivate() {}
 
-module.exports = {
-    activate,
-    deactivate
-};
+module.exports = { activate, deactivate };

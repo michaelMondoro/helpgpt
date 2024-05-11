@@ -37,6 +37,10 @@
         "title": "Refactor - ChatGPT"
       },
       {
+        "command": "helpgpt.ask",
+        "title": "Ask - ChatGPT"
+      },
+      {
         "command": "helpgpt.open",
         "title": "Open - ChatGPT"
       }
