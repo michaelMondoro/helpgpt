@@ -14,6 +14,8 @@ Code Refactoring Suggestions: Get suggestions from ChatGPT on how to refactor an
 Convenient Access: Quickly access ChatGPT website from within VSCode.
 
 ## Usage
+![command](https://github.com/michaelMondoro/helpgpt/assets/38412172/9c81ebb9-6c03-4a44-8cf3-b3d920587a2c)
+![response](https://github.com/michaelMondoro/helpgpt/assets/38412172/861dc357-780d-49cd-8d03-6ad0f0788d76)
 
 Install the HelpGPT Extension from the VSCode marketplace.
 Use the following commands from the VSCode command palette:
