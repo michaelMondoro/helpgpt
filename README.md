@@ -2,6 +2,8 @@
 
 The HelpGPT Extension for Visual Studio Code (VSCode) integrates the power of ChatGPT, an AI chatbot, directly into your development environment. With this extension, you can easily interact with ChatGPT to get assistance with various tasks related to your code.
 
+This extension serves as a shortcut to the ChatGPT web interface. It allows you to send prompts and ask questions about your codebase directly from your editor, and will open up ChatGPT in your browser to display the response.
+
 ## Features
 
 Prompt ChatGPT: Open a prompt input box to directly ask ChatGPT for assistance on any topic.
@@ -26,7 +28,11 @@ Use the following commands from the VSCode command palette:
 
 **Refactor - ChatGPT**: Receives suggestions for refactoring and optimizing the current code.
 
+**Ask - ChatGPT**: Opens an input box to allow you to ask ChatGPT a specific question about your code.
+
 **Open - ChatGPT**: Opens the ChatGPT website in your default browser.
+
+All commands will reference the **selected** code in your editor if there is some. If not, it will reference the entirety of the current source code **file** open in your editor.
 
 Follow the prompts and instructions to interact with ChatGPT and get the assistance you need.
 
